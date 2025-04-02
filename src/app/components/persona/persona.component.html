@@ -1,0 +1,49 @@
+<!-- Modal de confirmación -->
+<div *ngIf="mostrarModal" class="modal">
+  <div class="modal-content">
+    <h3>¿Estás seguro de que deseas eliminar esta persona?</h3>
+    <button (click)="eliminarPersonaConfirmada()">Confirmar</button>
+    <button (click)="cerrarModal()">Cancelar</button>
+  </div>
+</div>
+
+<div>
+  <h2>Personas</h2>
+
+  <!-- Campo de búsqueda -->
+  <input type="text" [(ngModel)]="textoBusqueda" (input)="filtrarPersonas()" placeholder="Buscar...">
+
+  <!-- Botón para registrar una nueva persona -->
+  <button (click)="irACrearPersona()" style="float: right; margin-bottom: 10px;">Registrar</button>
+
+  <!-- Tabla para mostrar las personas -->
+  <table border="1" cellspacing="0" cellpadding="5" style="width: 100%; margin-top: 20px;">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Edad</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let p of personasPaginadas">
+        <td>{{ p.nombre }}</td>
+        <td>{{ p.edad }}</td>
+        <td>
+          <!-- Botón para redirigir a la página de actualización -->
+          <button (click)="irAEditarPersona(p.id ?? 0)">Editar</button>
+        
+          <!-- Botón para eliminar con confirmación -->
+          <button (click)="confirmarEliminarPersona(p.id ?? 0)">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Controles de paginación -->
+  <div style="margin-top: 20px;">
+    <button (click)="cambiarPagina('previous')" [disabled]="paginaActual === 1">Anterior</button>
+    <span> Página {{ paginaActual }} </span>
+    <button (click)="cambiarPagina('next')" [disabled]="paginaActual === totalPaginas">Siguiente</button>
+  </div>
+</div>

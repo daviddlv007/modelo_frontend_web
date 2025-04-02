@@ -1,0 +1,52 @@
+<div class="form-container">
+    <h2>Crear Persona</h2>
+  
+    <!-- Formulario para crear persona -->
+    <form (ngSubmit)="crearPersona()" #personaForm="ngForm">
+      <div class="form-group">
+        <label for="nombre">Nombre:</label>
+        <input 
+          id="nombre" 
+          [(ngModel)]="persona.nombre" 
+          name="nombre" 
+          placeholder="Nombre" 
+          required 
+          minlength="3"
+          #nombre="ngModel" 
+          class="form-control"
+        />
+        <!-- Mensaje de error si el campo no es válido -->
+        <div *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)" class="error-message">
+          <small *ngIf="nombre.errors?.['required']">El nombre es obligatorio.</small>
+          <small *ngIf="nombre.errors?.['minlength']">El nombre debe tener al menos 3 caracteres.</small>
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="edad">Edad:</label>
+        <input 
+          id="edad" 
+          [(ngModel)]="persona.edad" 
+          name="edad" 
+          placeholder="Edad" 
+          type="number" 
+          required 
+          min="1"
+          #edad="ngModel" 
+          class="form-control"
+        />
+        <!-- Mensaje de error si el campo no es válido -->
+        <div *ngIf="edad.invalid && (edad.dirty || edad.touched)" class="error-message">
+          <small *ngIf="edad.errors?.['required']">La edad es obligatoria.</small>
+          <small *ngIf="edad.errors?.['min']">La edad debe ser mayor que 0.</small>
+        </div>
+      </div>
+  
+      <!-- Botones de acción -->
+      <div class="button-container">
+        <button type="submit" [disabled]="personaForm.invalid" class="submit-btn">Crear</button>
+        <button type="button" (click)="cancelar()" class="cancel-btn">Cancelar</button>
+      </div>
+    </form>
+  </div>
+  
