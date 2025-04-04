@@ -1,0 +1,25 @@
+<div class="full-page-container">
+  <div class="login-container">
+    <h2>Iniciar Sesión</h2>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="correo">Correo Electrónico</label>
+        <input type="email" id="correo" formControlName="correo" required>
+        <div *ngIf="loginForm.get('correo')?.errors?.['email'] && loginForm.get('correo')?.touched" class="error-message">
+          Por favor ingresa un correo electrónico válido
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="contrasena">Contraseña</label>
+        <input type="password" id="contrasena" formControlName="contrasena" required>
+      </div>
+
+      <button type="submit" [disabled]="!loginForm.valid">Iniciar Sesión</button>
+
+      <div *ngIf="errorMessage" class="error-message">
+        {{ errorMessage }}
+      </div>
+    </form>
+  </div>
+</div>

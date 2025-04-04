@@ -8,18 +8,31 @@ import { AutoUpdateComponent } from './components/auto/auto-update/auto-update.c
 import { PerroComponent } from './components/perro/perro.component';
 import { PerroCreateComponent } from './components/perro/perro-create/perro-create.component';
 import { PerroUpdateComponent } from './components/perro/perro-update/perro-update.component';
-
+import { LoginComponent } from './components/auth/login/login.component';
+import { AuthGuard } from './guards/auth/auth.guard';
+import { MainLayoutComponent } from './layouts/main-layout/main-layout.component';
 
 export const routes: Routes = [
-  { path: 'persona', component: PersonaComponent },
-  { path: 'persona-create', component: PersonaCreateComponent },
-  { path: 'persona-update/:id', component: PersonaUpdateComponent },
-  
-  { path: 'auto', component: AutoComponent },
-  { path: 'auto-create', component: AutoCreateComponent },
-  { path: 'auto-update/:id', component: AutoUpdateComponent },
+  { 
+    path: '',
+    component: MainLayoutComponent,
+    canActivate: [AuthGuard],
+    children: [
+      { path: 'persona', component: PersonaComponent },
+      { path: 'persona-create', component: PersonaCreateComponent },
+      { path: 'persona-update/:id', component: PersonaUpdateComponent },
+      
+      { path: 'auto', component: AutoComponent },
+      { path: 'auto-create', component: AutoCreateComponent },
+      { path: 'auto-update/:id', component: AutoUpdateComponent },
 
-  { path: 'perro', component: PerroComponent },
-  { path: 'perro-create', component: PerroCreateComponent },
-  { path: 'perro-update/:id', component: PerroUpdateComponent }
+      { path: 'perro', component: PerroComponent },
+      { path: 'perro-create', component: PerroCreateComponent },
+      { path: 'perro-update/:id', component: PerroUpdateComponent },
+
+      { path: '', redirectTo: 'persona', pathMatch: 'full' }
+    ]
+  },
+  { path: 'login', component: LoginComponent },
+  { path: '**', redirectTo: 'persona' }
 ];

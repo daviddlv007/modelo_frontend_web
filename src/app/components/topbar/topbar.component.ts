@@ -1,18 +1,31 @@
+// topbar.component.ts
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { AuthService } from '../../services/auth/auth.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-topbar',
   standalone: true,
-  imports: [RouterModule],
+  imports: [RouterModule, CommonModule],
   templateUrl: './topbar.component.html',
   styleUrl: './topbar.component.scss'
 })
 export class TopbarComponent {
   title = 'Mi Aplicación';
-  menuOpen = false; // Estado del menú
+  menuOpen = false;
+
+  constructor(private authService: AuthService) {}
 
   toggleMenu() {
-    this.menuOpen = !this.menuOpen; // Cambiar el estado del menú
+    this.menuOpen = !this.menuOpen;
+  }
+
+  logout(): void {
+    this.authService.logout().subscribe();
+  }
+
+  isAuthenticated(): boolean {
+    return this.authService.isAuthenticated();
   }
 }
