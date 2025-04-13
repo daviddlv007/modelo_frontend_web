@@ -34,8 +34,7 @@
             "styles": [
               "src/styles.scss"
             ],
-            "scripts": [],
-            "baseHref": "/modelo_frontend_web/"
+            "scripts": []
           },
           "configurations": {
             "production": {
