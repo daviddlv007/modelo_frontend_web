@@ -25,7 +25,4 @@ jobs:
         run: npm run build -- --configuration production
 
       - name: Desplegar en GitHub Pages
-        uses: angular-schule/angular-cli-ghpages@v1
-        with:
-          baseHref: /modelo_frontend_web/
-          directory: dist/frontend/browser
+        run: npx angular-cli-ghpages --dir=dist/frontend/browser --base-href /modelo_frontend_web/
