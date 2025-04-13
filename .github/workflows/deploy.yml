@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
@@ -21,17 +21,11 @@ jobs:
       - name: Instalar dependencias
         run: npm install
 
-      - name: Build del proyecto
+      - name: Construir proyecto Angular
         run: npm run build -- --configuration production
 
-      - name: Configurar Git para despliegue
-        run: |
-          git config --global user.name "GitHub Actions"
-          git config --global user.email "actions@github.com"
-          git remote set-url origin https://github.com/daviddlv007/modelo_frontend_web.git
-          git remote set-url --push origin https://$GH_TOKEN@github.com/daviddlv007/modelo_frontend_web.git
-
-      - name: Desplegar en GitHub Pages
-        run: npx angular-cli-ghpages --dir=dist/frontend/browser
-        env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+      - name: Publicar en GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist/frontend/browser
