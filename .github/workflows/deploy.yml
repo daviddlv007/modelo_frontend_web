@@ -25,4 +25,4 @@ jobs:
         run: npm run build -- --configuration production
 
       - name: Desplegar en GitHub Pages
-        run: npx angular-cli-ghpages --dir=dist/frontend/browser --base-href /modelo_frontend_web/
+        run: npx angular-cli-ghpages --dir=dist/frontend/browser
