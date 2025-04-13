@@ -22,7 +22,7 @@ jobs:
         run: npm install
 
       - name: Construir proyecto Angular
-        run: npm run build -- --configuration production
+        run: npm run build -- --configuration production --base-href /modelo_frontend_web/
 
       - name: Publicar en GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
